@@ -17,9 +17,17 @@ function flipCard(){
         secondCard = this;
 
         // do cards match?
-        console.log(firstCard.dataset.cardname);
-        console.log(secondCard.dataset.cardname);
-
+        if(firstCard.dataset.cardname === secondCard.dataset.cardname){
+            // it's a match
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+        }else {
+            // not a match
+            setTimeout(() => {
+                firstCard.classList.remove('flip');
+                secondCard.classList.remove('flip');
+            }, 1500);
+        }
     }
 }
 
