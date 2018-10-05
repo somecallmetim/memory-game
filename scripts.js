@@ -9,6 +9,10 @@ function flipCard(){
     if(lockboard){
         return;
     }
+
+    if(this === firstCard){
+        return;
+    }
     this.classList.toggle('flip');
 
     if(!hasFlippedCard){
@@ -38,6 +42,8 @@ function checkForMatch(){
 function disableCards(){
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
+
+    resetBoard();
 }
 
 function unflipCards(){
@@ -46,8 +52,13 @@ function unflipCards(){
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
 
-        lockboard = false;
+        resetBoard();
     }, 1500);
+}
+
+function resetBoard() {
+    [hasFlippedCard, lockboard] = [false, false];
+    [firstCard, secondCard] = [null, null];
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
